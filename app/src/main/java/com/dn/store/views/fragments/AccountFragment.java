@@ -35,16 +35,6 @@ public class AccountFragment extends Fragment{
     public boolean onOptionsItemSelected(MenuItem item) {
 
         switch (item.getItemId()) {
-            case R.id.cart_action:
-                //TODO
-                boolean authed = true;
-                if (authed) {
-                    Intent intent = new Intent(getActivity(), GioHangActivity.class);
-                    startActivity(intent);
-                } else {
-                    //Mo intent dang nhap
-                }
-                break;
             case R.id.search:
                 Intent intent = new Intent(getActivity(), SearchActivity.class);
                 startActivity(intent);
