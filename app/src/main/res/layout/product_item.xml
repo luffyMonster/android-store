@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="2dp"
+        android:layout_marginLeft="1dp"
+        android:layout_marginRight="1dp"
+        card_view:cardCornerRadius="1dp"
+        card_view:cardElevation="1dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="5dp">
+
+
+            <ImageView
+                android:id="@+id/product_image"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:adjustViewBounds="true"
+                card_view:srcCompat="@mipmap/ic_launcher" />
+
+            <TextView
+                android:id="@+id/product_description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/product_image"
+                android:textSize="12sp"
+                android:text="This is title of this product This is title of this product" />
+
+            <TextView
+                android:id="@+id/product_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/product_description"
+                android:text="245.000"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:textColor="@color/material_orange_700" />
+
+            <TextView
+                android:id="@+id/product_price_unit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/product_description"
+                android:layout_toEndOf="@id/product_price"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:text="@string/money_unit"
+                android:textColor="@color/material_orange_700" />
+
+            <RatingBar
+                android:id="@+id/product_rating_bar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/product_price"
+                android:max="@integer/rating_product_maximum"
+                android:stepSize="0.1"
+                android:isIndicator="true"
+                style="?android:attr/ratingBarStyleSmall"
+                />
+            <TextView
+                android:id="@+id/product_rating_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/product_price"
+                android:layout_toEndOf="@id/product_rating_bar"
+                android:layout_marginBottom="1dp"
+                android:layout_marginStart="2dp"
+                android:textSize="12sp"
+                android:text="(15)"/>
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+</LinearLayout>

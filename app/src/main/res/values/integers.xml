@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer name="flip_interval">4000</integer>
+    <integer name="slide_animation_duration">100</integer>
+    <integer name="rating_product_maximum">5</integer>
+</resources>

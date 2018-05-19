@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "373545143181",
+    "firebase_url": "https://ptit-store.firebaseio.com",
+    "project_id": "ptit-store",
+    "storage_bucket": "ptit-store.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:373545143181:android:b5ec50db9645c093",
+        "android_client_info": {
+          "package_name": "com.dn.store"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "373545143181-oosnea4pbdagm26cqei65gebn5uqfbfe.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.dn.store",
+            "certificate_hash": "64185b78c84f50123d77b1f2034592dc3655ec65"
+          }
+        },
+        {
+          "client_id": "373545143181-44g55pfl7flj3ott5fr159lerd543q5m.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDm01W8Am8cYcskJ6ErnO7RMTNxb1sg8kg"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "373545143181-44g55pfl7flj3ott5fr159lerd543q5m.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
