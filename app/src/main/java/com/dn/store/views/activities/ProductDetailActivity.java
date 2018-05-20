@@ -1,5 +1,6 @@
 package com.dn.store.views.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -61,35 +62,15 @@ public class ProductDetailActivity extends AppCompatActivity {
     }
 
     private void EventButton() {
-//        btndatmua.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                if (MainActivity.manggiohang.size() > 0) {
-//                    int sl = Integer.parseInt(spinner.getSelectedItem().toString());
-//                    boolean exit = false;
-//                    for (int i = 0; i < MainActivity.manggiohang.size(); i++) {
-//                        if (MainActivity.manggiohang.get(i).getIdsp() == id) {
-//                            MainActivity.manggiohang.get(i).setSoluongsp(MainActivity.manggiohang.get(i).getSoluongsp() + sl);
-//
-//                            MainActivity.manggiohang.get(i).setGiasp(GiaChitiet * MainActivity.manggiohang.get(i).getSoluongsp());
-//                            exit = true;
-//                        }
-//                    }
-//                    if (exit == false) {
-//                        int soluong = Integer.parseInt(spinner.getSelectedItem().toString());
-//                        long Giamoi = soluong * GiaChitiet;
-//                        MainActivity.manggiohang.add(new Cart(id, TenChitiet, Giamoi, HinhanhChitiet, soluong));
-//                    }
-//
-//                } else {
-//                    int soluong = Integer.parseInt(spinner.getSelectedItem().toString());
-//                    long Giamoi = soluong * GiaChitiet;
-//                    MainActivity.manggiohang.add(new Cart(id, TenChitiet, Giamoi, HinhanhChitiet, soluong));
-//                }
-//                Intent intent = new Intent(ProductDetailActivity.this, GioHangActivity.class);
-//                startActivity(intent);
-//            }
-//        });
+        btndatmua.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+                Intent intent = new Intent(ProductDetailActivity.this, GioHangActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
 

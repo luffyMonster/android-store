@@ -10,4 +10,7 @@
     <string name="latest_product">Sản phẩm mới nhất</string>
     <string name="search_not_found">Không có kết quả nào.</string>
     <string name="change_view">Change view</string>
+    <string name="total_pay">Tổng cộng</string>
+    <string name="thanh_toan">Thanh toán giỏ hàng</string>
+    <string name="tiep_tuc_mua_hang">Tiếp tục mua hàng</string>
 </resources>
