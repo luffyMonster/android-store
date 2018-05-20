@@ -8,7 +8,7 @@ public class Product {
 
     private String name;
     private List<String> details;
-    private float price;
+    private Long price;
     private String image;
 //    private Map<String ,Boolean> categories;
     private float rating;
@@ -34,11 +34,11 @@ public class Product {
         this.details = details;
     }
 
-    public float getPrice() {
+    public Long getPrice() {
         return price;
     }
 
-    public void setPrice(float price) {
+    public void setPrice(Long price) {
         this.price = price;
     }
 

@@ -18,8 +18,10 @@ import android.widget.TextView;
 
 import com.dn.store.R;
 import com.dn.store.models.Cart;
+import com.dn.store.models.CartListener;
 import com.dn.store.models.DataListener;
 import com.dn.store.models.Product;
+import com.dn.store.utils.Utils;
 import com.dn.store.views.adapters.GioHangAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.auth.FirebaseAuth;
@@ -33,7 +35,7 @@ import java.util.List;
 
 //import android.widget.Toolbar;
 
-public class GioHangActivity extends AppCompatActivity implements View.OnClickListener {
+public class GioHangActivity extends AppCompatActivity  {
     static String TAG = GioHangActivity.class.getName();
 
     RecyclerView recycleViewGioHang;
@@ -46,10 +48,10 @@ public class GioHangActivity extends AppCompatActivity implements View.OnClickLi
 
     GioHangAdapter giohangAdapter;
     private DatabaseReference mDatabase;
-    private DatabaseReference mCartRef;
     private ValueEventListener mCartListener;
     private List<Cart> carts;
     private LinearLayoutManager mManager;
+    private long tongtien;
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
@@ -59,38 +61,12 @@ public class GioHangActivity extends AppCompatActivity implements View.OnClickLi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_giohang);
         mDatabase = FirebaseDatabase.getInstance().getReference();
-        mCartRef = mDatabase.child("carts");
         carts = new ArrayList<>();
-
+        mAuth = FirebaseAuth.getInstance();
         Anhxa();
         ActionToolbar();
         EventButton();
 
-        btnthanhtoan.setOnClickListener(this);
-    }
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.buttonthanhtoangiohang:
-                mAuth = FirebaseAuth.getInstance();
-                if (mAuth.getCurrentUser() == null) {
-                    Intent intent = new Intent(GioHangActivity.this, LoginActivity.class);
-                    startActivity(intent);
-                } else {
-                    Intent intent = new Intent(GioHangActivity.this, Thongtinkhachhang.class);
-                    startActivity(intent);
-                }
-                break;
-        }
-    }
-
-    public void addCartToFirebase(Cart cart) {
-        List<Cart> cartsTemp = new ArrayList<>();
-        cartsTemp.add(cart);
-        for (Cart cart1 : cartsTemp) {
-            mCartRef.child(String.valueOf(cart1.getIdsp())).setValue(cart1);
-        }
     }
 
 
@@ -110,20 +86,26 @@ public class GioHangActivity extends AppCompatActivity implements View.OnClickLi
             @Override
             public void onClick(View view) {
                 if (carts.size() > 0) {
-                    Intent intent = new Intent();
+                    if (mAuth.getCurrentUser() == null) {
+                        Intent intent = new Intent(GioHangActivity.this, LoginActivity.class);
+                        startActivity(intent);
+                    } else {
+                        Intent intent = new Intent(GioHangActivity.this, Thongtinkhachhang.class);
+                        startActivity(intent);
+                    }
                 } else {
-//                    CheckConnection.ShowToast_Short(getApplicationContext(), "Gio hang cua ban chua co san pham de thanh toan");
+                    Utils.showToastShort(getApplicationContext(), "Gio hang cua ban chua co san pham de thanh toan");
                 }
             }
         });
     }
 
     public void EvenUltil() {
-        long tongtien = 0;
+        tongtien = 0;
         for (int i = 0; i < carts.size(); i++) {
-            tongtien += carts.get(i).getGiasp()*carts.get(i).getSoluongsp();
+            tongtien += carts.get(i).getGiasp() * carts.get(i).getSoluongsp();
         }
-        txttongtien.setText(String.valueOf(tongtien) + " ");
+        txttongtien.setText(String.valueOf(tongtien));
     }
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
@@ -150,22 +132,24 @@ public class GioHangActivity extends AppCompatActivity implements View.OnClickLi
         recycleViewGioHang.setHasFixedSize(false);
         recycleViewGioHang.setNestedScrollingEnabled(false);
         recycleViewGioHang.setLayoutManager(mManager);
-
-        Query postsQuery = mCartRef.orderByChild("tensp");
+        String uid = mAuth.getUid();
+        Query postsQuery = mDatabase.child("carts").child(uid).orderByChild("tensp");
         FirebaseRecyclerOptions<Cart> options = new FirebaseRecyclerOptions.Builder<Cart>()
                 .setQuery(postsQuery, Cart.class)
                 .build();
-        giohangAdapter = new GioHangAdapter(options, this, new DataListener() {
+
+        DataListener dataListener = new DataListener() {
             @Override
             public void onChanged() {
+                carts = new ArrayList<>();
                 if (giohangAdapter.getItemCount() == 0) {
                     txtthongbao.setVisibility(View.VISIBLE);
                 } else {
                     txtthongbao.setVisibility(View.GONE);
                 }
 
-                for (int i = 0; i < giohangAdapter.getItemCount(); i++){
-                    carts.add(i,giohangAdapter.getItem(i));
+                for (int i = 0; i < giohangAdapter.getItemCount(); i++) {
+                    carts.add(i, giohangAdapter.getItem(i));
                 }
 
                 EvenUltil();
@@ -175,7 +159,22 @@ public class GioHangActivity extends AppCompatActivity implements View.OnClickLi
             public void onError() {
 
             }
-        });
+        };
+
+        CartListener cartListener = new CartListener() {
+            @Override
+            public void onPlus(long price) {
+                tongtien += price;
+                txttongtien.setText(String.valueOf(tongtien));
+            }
+
+            @Override
+            public void onMinus(long price) {
+                tongtien -= price;
+                txttongtien.setText(String.valueOf(tongtien));
+            }
+        };
+        giohangAdapter = new GioHangAdapter(options, this, dataListener, cartListener);
         recycleViewGioHang.setAdapter(giohangAdapter);
 
     }
@@ -183,7 +182,7 @@ public class GioHangActivity extends AppCompatActivity implements View.OnClickLi
     @Override
     protected void onPause() {
         super.onPause();
-        if (giohangAdapter != null){
+        if (giohangAdapter != null) {
             giohangAdapter.stopListening();
         }
     }
@@ -191,7 +190,7 @@ public class GioHangActivity extends AppCompatActivity implements View.OnClickLi
     @Override
     protected void onResume() {
         super.onResume();
-        if (giohangAdapter != null){
+        if (giohangAdapter != null) {
             giohangAdapter.startListening();
         }
     }

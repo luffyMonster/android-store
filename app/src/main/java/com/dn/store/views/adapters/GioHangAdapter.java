@@ -7,11 +7,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.dn.store.R;
 import com.dn.store.models.Cart;
+import com.dn.store.models.CartListener;
 import com.dn.store.models.DataListener;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
@@ -22,56 +24,65 @@ import com.squareup.picasso.Picasso;
 public class GioHangAdapter extends FirebaseRecyclerAdapter<Cart, GioHangAdapter.ViewHolder> {
     private Context context;
     private DataListener listener;
+    private CartListener cartListener;
 
+    private long currentPrice;
+    private int currentQty;
 
-    public GioHangAdapter(@NonNull FirebaseRecyclerOptions<Cart> options, Context context, DataListener listener) {
+    public GioHangAdapter(@NonNull FirebaseRecyclerOptions<Cart> options, Context context, DataListener listener, CartListener cartListener) {
         super(options);
         this.context = context;
         this.listener = listener;
+        this.cartListener = cartListener;
     }
 
     @Override
-    protected void onBindViewHolder(@NonNull final ViewHolder viewHolder, int position, @NonNull final Cart cart) {
+    protected void onBindViewHolder(@NonNull final ViewHolder viewHolder, final int position, @NonNull final Cart cart) {
         Picasso.get().load(cart.getHinhsp()).into(viewHolder.imggiohang);
         viewHolder.txttengiohang.setText(cart.getTensp());
         viewHolder.txtgiagiohang.setText(String.valueOf(cart.getGiasp()) + " Đ");
         viewHolder.btnvalues.setText(String.valueOf(cart.getSoluongsp()));
 
+        viewHolder.btnRemove.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getRef(position).removeValue();
+            }
+        });
+
         viewHolder.btnplus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int slmoi = Integer.parseInt(viewHolder.btnvalues.getText().toString()) + 1;
-                int slht = cart.getSoluongsp();
-                long giaht = cart.getGiasp();
-                cart.setSoluongsp(slmoi);
-                long giamoi = 0;
-                if (slht > 0) {
-                    giamoi = (giaht*slmoi) /slht;
-                } else {
-                    slht = 0;
+                long unit = cart.getGiasp();
+                long diffQty = 1;
+                currentQty += 1;
+                if (currentQty > 10){
+                    currentQty = 10;
+                    diffQty = 0;
                 }
-                cart.setGiasp(giamoi);
-                viewHolder.txtgiagiohang.setText(String.valueOf(giamoi) + " Đ");
-                viewHolder.btnvalues.setText(String.valueOf(slmoi));
+                currentPrice = currentQty * unit;
+
+                viewHolder.txtgiagiohang.setText(String.valueOf(currentPrice) + " Đ");
+                viewHolder.btnvalues.setText(String.valueOf(currentQty));
+                cartListener.onPlus(diffQty*unit);
             }
         });
 
         viewHolder.btnminus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int slmoi = Integer.parseInt(viewHolder.btnvalues.getText().toString()) - 1;
-                int slht = cart.getSoluongsp();
-                long giaht = cart.getGiasp();
-                cart.setSoluongsp(slmoi);
-                long giamoi = 0;
-                if (slht > 0) {
-                    giamoi = (giaht*slmoi) /slht;
-                } else {
-                    slht = 0;
+                long unit = cart.getGiasp();
+                long diffQty = 1;
+                currentQty -= 1;
+                if (currentQty < 1){
+                    currentQty = 1;
+                    diffQty = 0;
                 }
-                cart.setGiasp(giamoi);
-                viewHolder.txtgiagiohang.setText(String.valueOf(giamoi) + " Đ");
-                viewHolder.btnvalues.setText(String.valueOf(slmoi));
+                currentPrice = currentQty * unit;
+
+                viewHolder.txtgiagiohang.setText(String.valueOf(currentPrice) + " Đ");
+                viewHolder.btnvalues.setText(String.valueOf(currentQty));
+                cartListener.onMinus(diffQty*unit);
             }
         });
     }
@@ -88,6 +99,7 @@ public class GioHangAdapter extends FirebaseRecyclerAdapter<Cart, GioHangAdapter
         public TextView txttengiohang, txtgiagiohang;
         public ImageView imggiohang;
         public Button btnminus, btnvalues, btnplus;
+        public ImageButton btnRemove;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -97,6 +109,7 @@ public class GioHangAdapter extends FirebaseRecyclerAdapter<Cart, GioHangAdapter
             btnminus = (Button) itemView.findViewById(R.id.buttonminus);
             btnvalues = (Button) itemView.findViewById(R.id.buttovalues);
             btnplus = (Button) itemView.findViewById(R.id.buttonplus);
+            btnRemove = itemView.findViewById(R.id.btn_remove);
         }
     }
 

@@ -6,6 +6,12 @@ import android.app.FragmentTransaction;
 import android.content.Context;
 import android.widget.Toast;
 
+import com.dn.store.models.Cart;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 public class Utils {
     public static void registerTransaction(FragmentManager manager, int container, Fragment fragment, String tag){
         FragmentTransaction transaction = manager.beginTransaction();
@@ -18,22 +24,10 @@ public class Utils {
         transaction.commit();
     }
 
-//    public static boolean haveNetworkConnection(Context context) {
-//        boolean haveConnectedWifi = false;
-//        boolean haveConnectedMobile = false;
-//
-//        ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-//        NetworkInfo[] netInfo = cm.getAllNetworkInfo();
-//        for (NetworkInfo ni : netInfo) {
-//            if (ni.getTypeName().equalsIgnoreCase("WIFI"))
-//                if (ni.isConnected())
-//                    haveConnectedWifi = true;
-//            if (ni.getTypeName().equalsIgnoreCase("MOBILE"))
-//                if (ni.isConnected())
-//                    haveConnectedMobile = true;
-//        }
-//        return haveConnectedWifi || haveConnectedMobile;
-//    }
+    public static void writeNewCart(String userId, Cart cart, OnSuccessListener slistener, OnFailureListener flistener) {
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
+        ref.child("carts").child(userId).push().setValue(cart).addOnSuccessListener(slistener).addOnFailureListener(flistener);
+    }
 
 
     public static void showToastShort(Context context, String thongbao){

@@ -30,12 +30,7 @@ public class ProductAdapter extends FirebaseRecyclerAdapter<Product, ProductAdap
     private Context context;
     int resId;
     private DataListener listener;
-    /**
-     * Initialize a {@link RecyclerView.Adapter} that listens to a Firebase query. See
-     * {@link FirebaseRecyclerOptions} for configuration options.
-     *
-     * @param options
-     */
+
     public ProductAdapter(@NonNull FirebaseRecyclerOptions<Product> options, Context context, DataListener listener, int resId) {
         super(options);
         this.context = context;

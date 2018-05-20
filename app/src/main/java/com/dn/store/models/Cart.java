@@ -1,13 +1,15 @@
 package com.dn.store.models;
 
 public class Cart {
-    public int idsp;
+    public String idsp;
     public String tensp;
     public long giasp;
     public String hinhsp;
     public int soluongsp;
 
-    public Cart(int idsp, String tensp, long giasp, String hinhsp, int soluongsp) {
+    public Cart(){}
+
+    public Cart(String idsp, String tensp, long giasp, String hinhsp, int soluongsp) {
         this.idsp = idsp;
         this.tensp = tensp;
         this.giasp = giasp;
@@ -15,11 +17,11 @@ public class Cart {
         this.soluongsp = soluongsp;
     }
 
-    public int getIdsp() {
+    public String getIdsp() {
         return idsp;
     }
 
-    public void setIdsp(int idsp) {
+    public void setIdsp(String idsp) {
         this.idsp = idsp;
     }
 

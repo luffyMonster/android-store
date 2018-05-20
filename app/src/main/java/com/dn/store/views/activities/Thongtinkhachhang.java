@@ -29,7 +29,7 @@ public class Thongtinkhachhang extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_thongtinkhachhang);
-//        Anhxa();
+        Anhxa();
         btntrove.getRootView().setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 finish();
