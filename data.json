@@ -7,8 +7,8 @@
         "Sản phẩm gồm 1 ngăn chinh đựng sách vở,ipad",
         "Ngoài ra còn 3 ngăn phụ rộng rãi chứa được những giấy tờ cần thiết khác nhau"
       ],
-      "image": "https://vn-test-11.slatic.net/p/8/dong-ho-nam-winner-w050-co-lo-may-co-lich-den-6351-6443864-672ec1755667b43825d08835200323da-catalog_233.jpg",
-      "name": "Đồng hồ nam Winner TM340 cơ lộ máy dây thép không gỉ (Đen)",
+      "image": "https://vn-test-11.slatic.net/p/7/tui-deo-cheo-thoi-trang-nam-nuxam-chi-0192-23170712-596cdfae8f8771a7f5cde792a2d6c4b9-catalog.jpg_200x200q80.jpg_.webp",
+      "name": "Túi đeo chéo thời trang nam nu(Xám chì)",
       "price": 75000,
       "rating": 3.5,
       "ratingCount": 12,
@@ -103,33 +103,8 @@
   ],
   "categories": [
     {
-      "root_id": "0",
-      "name": "Trang phục nam",
-      "image": "https://vn-live-01.slatic.net/original/93b6a5c8b782705c31a2cc76a1ae0f05.jpg"
-    }, {
-      "root_id": "0",
-      "name": "Đồ lót nam",
-      "image": "https://vn-live-01.slatic.net/original/93b6a5c8b782705c31a2cc76a1ae0f05.jpg"
-    },
-     {
-      "root_id": "0",
-      "name": "Giày nam",
-      "image": "https://vn-live-01.slatic.net/original/93b6a5c8b782705c31a2cc76a1ae0f05.jpg"
-    },
-    {
-      "root_id": "0",
-      "name": "Túi xách nam",
-      "image": "https://vn-live-01.slatic.net/original/93b6a5c8b782705c31a2cc76a1ae0f05.jpg"
-    },
-     {
-      "root_id": "0",
-      "name": "Phụ kiện nam",
-      "image": "https://vn-live-01.slatic.net/original/93b6a5c8b782705c31a2cc76a1ae0f05.jpg"
-    },
-    {
-      "root_id": "1",
-      "name": "Trang phục nữ",
-      "image": "https://vn-live-01.slatic.net/original/6345717bfdcc13191126ad706eb55885.jpg"
+      "name": "123",
+      "detail": "456"
     }
   ],
   "ads": [

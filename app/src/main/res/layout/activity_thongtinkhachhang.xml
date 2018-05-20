@@ -69,22 +69,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <Button
-            android:layout_marginRight="70dp"
             android:background="#6af1ff"
             android:textColor="#28588c"
             android:textSize="15sp"
-            android:padding="10dp"
+            android:layout_gravity="center"
             android:id="@+id/buttonxacnhan"
             android:text="Xác nhận"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-        <Button
-            android:background="#6af1ff"
-            android:textColor="#28588c"
-            android:textSize="15sp"
-            android:padding="10dp"
-            android:id="@+id/buttontrove"
-            android:text="Tro ve"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </LinearLayout>

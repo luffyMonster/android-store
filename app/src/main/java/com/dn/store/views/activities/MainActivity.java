@@ -1,23 +1,31 @@
 package com.dn.store.views.activities;
 
-
+import android.app.SearchManager;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.dn.store.R;
 import com.dn.store.utils.Utils;
 import com.dn.store.views.fragments.AccountFragment;
 import com.dn.store.views.fragments.CategoryFragment;
 import com.dn.store.views.fragments.HomeFragment;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class MainActivity extends AppCompatActivity {
 
-    boolean firstRun = true;
+    private FirebaseAuth mAuth;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -32,12 +40,14 @@ public class MainActivity extends AppCompatActivity {
                     Utils.registerTransaction(getFragmentManager(), R.id.fragment_content, new CategoryFragment());
                     return true;
                 case R.id.navigation_account:
-                    Utils.registerTransaction(getFragmentManager(), R.id.fragment_content, new AccountFragment());
-                    return true;
-                case R.id.navigation_cart:
-                    Intent intent = new Intent(MainActivity.this, GioHangActivity.class);
-                    startActivity(intent);
-                    return true;
+                    mAuth = FirebaseAuth.getInstance();
+                    if(mAuth.getCurrentUser() == null) {
+                        Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                        startActivity(intent);
+                        return true;
+                    } else {
+                        Toast.makeText(MainActivity.this,"Đăng nhập thành công rồi, gọi activity qlUser nhé", Toast.LENGTH_SHORT).show();
+                    }
             }
             return false;
         }
@@ -51,19 +61,17 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        BottomNavigationView navigation =  findViewById(R.id.navigation);
+        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
 
     }
 
+
+
     @Override
     protected void onResume() {
         super.onResume();
-        if (firstRun) {
-            Utils.registerTransaction(getFragmentManager(), R.id.fragment_content, new HomeFragment());
-            firstRun = false;
-        }
-
+        Utils.registerTransaction(getFragmentManager(), R.id.fragment_content, new HomeFragment());
     }
 }

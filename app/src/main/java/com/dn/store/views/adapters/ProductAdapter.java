@@ -13,8 +13,8 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.dn.store.IfListener.DataListener;
 import com.dn.store.R;
-import com.dn.store.models.DataListener;
 import com.dn.store.models.Product;
 import com.dn.store.views.activities.ProductDetailActivity;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
@@ -29,12 +29,7 @@ public class ProductAdapter extends FirebaseRecyclerAdapter<Product, ProductAdap
 
     private Context context;
     private DataListener listener;
-    /**
-     * Initialize a {@link RecyclerView.Adapter} that listens to a Firebase query. See
-     * {@link FirebaseRecyclerOptions} for configuration options.
-     *
-     * @param options
-     */
+
     public ProductAdapter(@NonNull FirebaseRecyclerOptions<Product> options, Context context, DataListener listener) {
         super(options);
         this.context = context;
@@ -46,7 +41,6 @@ public class ProductAdapter extends FirebaseRecyclerAdapter<Product, ProductAdap
     @Override
     public ProductItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.product_item, parent, false);
-        view.setMinimumHeight(parent.getMeasuredHeight() / 4);
         return new ProductItemViewHolder(view);
     }
 
@@ -89,7 +83,6 @@ public class ProductAdapter extends FirebaseRecyclerAdapter<Product, ProductAdap
             listener.onError();
         }
     }
-
 
 
     public  class ProductItemViewHolder extends RecyclerView.ViewHolder{

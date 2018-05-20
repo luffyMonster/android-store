@@ -10,10 +10,6 @@
         android:id="@+id/navigation_categories"
         android:icon="@drawable/ic_apps_black_24dp"
         android:title="@string/title_category" />
-    <item
-        android:id="@+id/navigation_cart"
-        android:icon="@drawable/icn_cart"
-        android:title="@string/title_cart" />
 
     <item
         android:id="@+id/navigation_account"

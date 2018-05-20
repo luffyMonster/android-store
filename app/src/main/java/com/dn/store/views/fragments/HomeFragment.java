@@ -19,6 +19,7 @@ import com.dn.store.views.activities.SearchActivity;
 
 public class HomeFragment extends Fragment {
     Toolbar toolbar;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
@@ -26,15 +27,15 @@ public class HomeFragment extends Fragment {
         setHasOptionsMenu(true);
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
-        toolbar = view.findViewById(R.id.toolbar);
+        toolbar = (Toolbar) view.findViewById(R.id.toolbar);
 
-        ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
-        return  view;
+        ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
+        return view;
     }
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.toolbar_home, menu);
+        inflater.inflate(R.menu.toolbar, menu);
         super.onCreateOptionsMenu(menu, inflater);
     }
 
@@ -42,6 +43,16 @@ public class HomeFragment extends Fragment {
     public boolean onOptionsItemSelected(MenuItem item) {
 
         switch (item.getItemId()) {
+            case R.id.cart_action:
+                //TODO
+                boolean authed = true;
+                if (authed) {
+                    Intent intent = new Intent(getActivity(), GioHangActivity.class);
+                    startActivity(intent);
+                } else {
+                    //Mo intent dang nhap
+                }
+                break;
             case R.id.search:
                 Intent intent = new Intent(getActivity(), SearchActivity.class);
                 startActivity(intent);
@@ -49,8 +60,6 @@ public class HomeFragment extends Fragment {
         }
         return true;
     }
-
-
 
 
 }

@@ -16,8 +16,8 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.dn.store.IfListener.DataListener;
 import com.dn.store.R;
-import com.dn.store.models.DataListener;
 import com.dn.store.models.Product;
 import com.dn.store.views.adapters.ProductAdapter;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
@@ -77,6 +77,15 @@ public class SearchActivity extends AppCompatActivity implements SearchView.OnQu
 
         switch (item.getItemId()) {
             case R.id.cart_action:
+                //TODO
+                boolean authed = true;
+                if (authed) {
+                    Intent intent = new Intent(this, GioHangActivity.class);
+                    startActivity(intent);
+                } else {
+                    //Mo intent dang nhap
+                }
+                break;
         }
         return true;
     }

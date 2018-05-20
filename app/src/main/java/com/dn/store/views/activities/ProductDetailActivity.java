@@ -45,6 +45,7 @@ public class ProductDetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chi_tiet_san_pham);
+        // Get post key from intent
         mProdKey = getIntent().getStringExtra(EXTRA_PRODUCT_KEY);
         if (mProdKey == null) {
             throw new IllegalArgumentException("Must pass EXTRA_PRODUCT_KEY");
@@ -91,45 +92,35 @@ public class ProductDetailActivity extends AppCompatActivity {
     public void onStart() {
         super.onStart();
 
-        // Add value event listener to the post
-        // [START post_value_event_listener]
-        ValueEventListener postListener = new ValueEventListener() {
+        ValueEventListener product = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                // Get Post object and use the values to update the UI
                 Product product = dataSnapshot.getValue(Product.class);
-                // [START_EXCLUDE]
                 Picasso.get().load(product.getImage()).into(imgChitiet);
                 txtten.setText(product.getName());
                 txtgia.setText(String.valueOf(product.getPrice()));
 
 
                 String details = "";
-                for (String detail : product.getDetails()) {
+                for (String detail:product.getDetails()){
                     detail += detail;
                     detail += "\n";
                 }
                 txtmota.setText(details);
                 ratingBar.setRating(product.getRating());
-                ratingbarCount.setText("(" + product.getRatingCount() + ")");
-                // [END_EXCLUDE]
+                ratingbarCount.setText("(" + product.getRatingCount() +")");
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                // Getting Post failed, log a message
                 Log.w(TAG, "loadProduct:onCancelled", databaseError.toException());
-                // [START_EXCLUDE]
-                Toast.makeText(ProductDetailActivity.this, "Failed to load post.",
+                Toast.makeText(ProductDetailActivity.this, "Failed to load product.",
                         Toast.LENGTH_SHORT).show();
-                // [END_EXCLUDE]
             }
         };
-        mProductRef.addValueEventListener(postListener);
-        // [END post_value_event_listener]
+        mProductRef.addValueEventListener(product);
 
-        // Keep copy of post listener so we can remove it when app stops
-        mProductListener = postListener;
+        mProductListener = product;
 
     }
 
@@ -166,5 +157,5 @@ public class ProductDetailActivity extends AppCompatActivity {
         btndatmua = findViewById(R.id.buttondatmua);
     }
 
-    public static String EXTRA_PRODUCT_KEY = "PRODUCT_KEY";
+    public static String EXTRA_PRODUCT_KEY =  "PRODUCT_KEY";
 }

@@ -7,6 +7,8 @@ public class Cart {
     public String hinhsp;
     public int soluongsp;
 
+    public Cart(){}
+
     public Cart(int idsp, String tensp, long giasp, String hinhsp, int soluongsp) {
         this.idsp = idsp;
         this.tensp = tensp;
@@ -54,4 +56,5 @@ public class Cart {
     public void setSoluongsp(int soluongsp) {
         this.soluongsp = soluongsp;
     }
+
 }

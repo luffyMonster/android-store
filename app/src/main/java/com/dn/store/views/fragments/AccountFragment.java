@@ -15,7 +15,7 @@ import com.dn.store.R;
 import com.dn.store.views.activities.GioHangActivity;
 import com.dn.store.views.activities.SearchActivity;
 
-public class AccountFragment extends Fragment{
+public class AccountFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
@@ -35,6 +35,16 @@ public class AccountFragment extends Fragment{
     public boolean onOptionsItemSelected(MenuItem item) {
 
         switch (item.getItemId()) {
+            case R.id.cart_action:
+                //TODO
+                boolean authed = true;
+                if (authed) {
+                    Intent intent = new Intent(getActivity(), GioHangActivity.class);
+                    startActivity(intent);
+                } else {
+                    //Mo intent dang nhap
+                }
+                break;
             case R.id.search:
                 Intent intent = new Intent(getActivity(), SearchActivity.class);
                 startActivity(intent);

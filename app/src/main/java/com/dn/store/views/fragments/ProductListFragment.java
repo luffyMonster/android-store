@@ -40,7 +40,7 @@ public abstract class ProductListFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_product_list, container, false);
         mDatabase = FirebaseDatabase.getInstance().getReference();
         mRecycler = rootView.findViewById(R.id.product_list);
-        mRecycler.setHasFixedSize(false);
+        mRecycler.setHasFixedSize(true);
         mRecycler.setNestedScrollingEnabled(false);
         return rootView;
     }
@@ -52,6 +52,7 @@ public abstract class ProductListFragment extends Fragment {
         mManager = new GridLayoutManager(getActivity(), 2);
         mRecycler.setLayoutManager(mManager);
 
+        // Set up FirebaseRecyclerAdapter with the Query
         Query postsQuery = getQuery(mDatabase);
         FirebaseRecyclerOptions<Product> options = new FirebaseRecyclerOptions.Builder<Product>()
                 .setQuery(postsQuery, Product.class)

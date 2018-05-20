@@ -149,8 +149,4 @@
     <color name="selector_blue_pressed">#442962FF</color>
     <color name="selector_purple_focused">#22AA00FF</color>
     <color name="selector_purple_pressed">#44AA00FF</color>
-    <color name="colorGray">#333</color>
-
-    <color name="color_radio_buton_trans">#80A7FFEB</color>
-    <color name="color_radio_buton">#A7FFEB</color>
 </resources>

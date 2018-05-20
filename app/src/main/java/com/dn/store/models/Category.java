@@ -3,7 +3,7 @@ package com.dn.store.models;
 public class Category {
 
     private String name;
-    private String image;
+    private String detail;
 
     public Category() {
     }
@@ -16,11 +16,11 @@ public class Category {
         this.name = name;
     }
 
-    public String getImage() {
-        return image;
+    public String getDetail() {
+        return detail;
     }
 
-    public void setImage(String image) {
-        this.image = image;
+    public void setDetail(String detail) {
+        this.detail = detail;
     }
 }

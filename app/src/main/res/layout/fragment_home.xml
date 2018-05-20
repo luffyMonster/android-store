@@ -7,40 +7,46 @@
     android:fitsSystemWindows="true"
     android:orientation="vertical">
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/toolbar_gradient"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="@style/AppTheme.AppBar.Dark"
-        app:layout_scrollFlags="scroll|enterAlways" />
-
-    <android.support.v4.widget.NestedScrollView
+    <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <RelativeLayout
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:background="@drawable/toolbar_gradient"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="@style/AppTheme.AppBar.Dark"
+            app:layout_scrollFlags="scroll|enterAlways" />
 
-            <fragment
-                android:id="@+id/ads_viewflipper"
-                class="com.dn.store.views.fragments.AdsBlockFragment"
-                android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:layout_gravity="top"
-                tools:layout="@layout/ads_block" />
+        <fragment
+            android:id="@+id/ads_viewflipper"
+            class="com.dn.store.views.fragments.AdsBlockFragment"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_gravity="top"
+            tools:layout="@layout/ads_block" />
+    </android.support.design.widget.AppBarLayout>
 
-            <fragment
-                android:id="@+id/fragment_latest_product"
-                class="com.dn.store.views.fragments.LatestProductListFragment"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/ads_viewflipper"
-                tools:layout="@layout/fragment_product_list" />
-        </RelativeLayout>
-    </android.support.v4.widget.NestedScrollView>
 
+    <LinearLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <fragment
+            android:id="@+id/fragment_latest_product"
+            class="com.dn.store.views.fragments.LatestProductListFragment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:layout="@layout/fragment_product_list" />
+    </LinearLayout>
+
+    <!--<TextView-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:text="ads"/>-->
 
 </LinearLayout>
