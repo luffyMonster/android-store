@@ -14,22 +14,20 @@ import com.dn.store.R;
 import com.dn.store.models.Category;
 import com.dn.store.models.DataListener;
 import com.dn.store.views.activities.CategoryDetailActivity;
-import com.dn.store.views.activities.ProductDetailActivity;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.squareup.picasso.Picasso;
 
 public class CategoriesAdapter extends FirebaseRecyclerAdapter<Category, CategoriesAdapter.CategoryItemHolder> {
     private Context context;
     private DataListener listener;
-    private int rootId;
 
-    public CategoriesAdapter(@NonNull FirebaseRecyclerOptions<Category> options, Context context, DataListener listener, int rootId) {
+    public CategoriesAdapter(@NonNull FirebaseRecyclerOptions<Category> options, Context context, DataListener listener) {
         super(options);
         this.context = context;
         this.listener = listener;
-        this.rootId = rootId;
     }
 
     @NonNull
@@ -44,12 +42,12 @@ public class CategoriesAdapter extends FirebaseRecyclerAdapter<Category, Categor
         Picasso.get().load(model.getImage()).placeholder(R.drawable.img_holder)
                 .fit().into(holder.img);
         holder.name.setText(model.getName());
-
+        final DatabaseReference prodRef = getRef(position);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, CategoryDetailActivity.class);
-                intent.putExtra(CategoryDetailActivity.ROOT_ID, rootId);
+                intent.putExtra(CategoryDetailActivity.CATEGORY_KEY, prodRef.getKey());
                 context.startActivity(intent);
             }
         });

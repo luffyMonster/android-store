@@ -7,7 +7,7 @@ public class ThoiTrangNuFragment extends FragmentListCategories {
 
     @Override
     public Query getQuery(DatabaseReference mDatabase) {
-        setRootId(1);
+        setRootId("1");
         return mDatabase.child("categories").orderByChild("root_id").equalTo(getRootId());
     }
 }

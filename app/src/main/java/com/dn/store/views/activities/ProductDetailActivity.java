@@ -16,15 +16,12 @@ import android.widget.Toast;
 
 import com.dn.store.R;
 import com.dn.store.models.Product;
-import com.dn.store.models.Sanpham;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
-
-import java.text.DecimalFormat;
 
 public class ProductDetailActivity extends AppCompatActivity {
 
@@ -36,6 +33,10 @@ public class ProductDetailActivity extends AppCompatActivity {
     TextView ratingbarCount;
     Spinner spinner;
     Button btndatmua;
+    int id = 0;
+    String TenChitiet = "";
+    int GiaChitiet = 0;
+    String HinhanhChitiet = "";
 
     String mProdKey;
     DatabaseReference mProductRef;
@@ -45,6 +46,7 @@ public class ProductDetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chi_tiet_san_pham);
+
         mProdKey = getIntent().getStringExtra(EXTRA_PRODUCT_KEY);
         if (mProdKey == null) {
             throw new IllegalArgumentException("Must pass EXTRA_PRODUCT_KEY");
@@ -54,9 +56,42 @@ public class ProductDetailActivity extends AppCompatActivity {
 
         Anhxa();
         ActionToolbar();
-        GetInformation();
         CatchEvenSpinner();
+        EventButton();
     }
+
+    private void EventButton() {
+//        btndatmua.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if (MainActivity.manggiohang.size() > 0) {
+//                    int sl = Integer.parseInt(spinner.getSelectedItem().toString());
+//                    boolean exit = false;
+//                    for (int i = 0; i < MainActivity.manggiohang.size(); i++) {
+//                        if (MainActivity.manggiohang.get(i).getIdsp() == id) {
+//                            MainActivity.manggiohang.get(i).setSoluongsp(MainActivity.manggiohang.get(i).getSoluongsp() + sl);
+//
+//                            MainActivity.manggiohang.get(i).setGiasp(GiaChitiet * MainActivity.manggiohang.get(i).getSoluongsp());
+//                            exit = true;
+//                        }
+//                    }
+//                    if (exit == false) {
+//                        int soluong = Integer.parseInt(spinner.getSelectedItem().toString());
+//                        long Giamoi = soluong * GiaChitiet;
+//                        MainActivity.manggiohang.add(new Cart(id, TenChitiet, Giamoi, HinhanhChitiet, soluong));
+//                    }
+//
+//                } else {
+//                    int soluong = Integer.parseInt(spinner.getSelectedItem().toString());
+//                    long Giamoi = soluong * GiaChitiet;
+//                    MainActivity.manggiohang.add(new Cart(id, TenChitiet, Giamoi, HinhanhChitiet, soluong));
+//                }
+//                Intent intent = new Intent(ProductDetailActivity.this, GioHangActivity.class);
+//                startActivity(intent);
+//            }
+//        });
+    }
+
 
     private void CatchEvenSpinner() {
         Integer[] soluong = new Integer[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
@@ -65,40 +100,14 @@ public class ProductDetailActivity extends AppCompatActivity {
 
     }
 
-    private void GetInformation() {
-        int id = 0;
-        String TenChitiet = "";
-        int GiaChitiet = 0;
-        String HinhanhChitiet = "";
-        String MotaChitiet = "";
-        int Idsanpham = 0;
-//        Sanpham sanpham = (Sanpham) getIntent().getSerializableExtra("thongtinsanpham");
-//        id = sanpham.getID();
-//        TenChitiet = sanpham.getTensanpham();
-//        GiaChitiet = sanpham.getGiasanpham();
-//        HinhanhChitiet = sanpham.getHinhanhsanpham();
-//        MotaChitiet = sanpham.getMotasanpham();
-//        Idsanpham = sanpham.getIDSanpham();
-//        txtten.setText(TenChitiet);
-//        DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
-//        txtgia.setText("Gia: " + decimalFormat.format(GiaChitiet) + "D");
-//        txtmota.setText(MotaChitiet);
-//        Picasso.get().load(HinhanhChitiet).into(imgChitiet);
-
-    }
-
     @Override
     public void onStart() {
         super.onStart();
 
-        // Add value event listener to the post
-        // [START post_value_event_listener]
         ValueEventListener postListener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                // Get Post object and use the values to update the UI
                 Product product = dataSnapshot.getValue(Product.class);
-                // [START_EXCLUDE]
                 Picasso.get().load(product.getImage()).into(imgChitiet);
                 txtten.setText(product.getName());
                 txtgia.setText(String.valueOf(product.getPrice()));
@@ -106,29 +115,23 @@ public class ProductDetailActivity extends AppCompatActivity {
 
                 String details = "";
                 for (String detail : product.getDetails()) {
-                    detail += detail;
-                    detail += "\n";
+                    details += detail;
+                    details += "\n";
                 }
                 txtmota.setText(details);
                 ratingBar.setRating(product.getRating());
                 ratingbarCount.setText("(" + product.getRatingCount() + ")");
-                // [END_EXCLUDE]
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                // Getting Post failed, log a message
                 Log.w(TAG, "loadProduct:onCancelled", databaseError.toException());
-                // [START_EXCLUDE]
-                Toast.makeText(ProductDetailActivity.this, "Failed to load post.",
+                Toast.makeText(ProductDetailActivity.this, "Failed to load product.",
                         Toast.LENGTH_SHORT).show();
-                // [END_EXCLUDE]
             }
         };
         mProductRef.addValueEventListener(postListener);
-        // [END post_value_event_listener]
 
-        // Keep copy of post listener so we can remove it when app stops
         mProductListener = postListener;
 
     }
@@ -137,7 +140,6 @@ public class ProductDetailActivity extends AppCompatActivity {
     public void onStop() {
         super.onStop();
 
-        // Remove post value event listener
         if (mProductListener != null) {
             mProductRef.removeEventListener(mProductListener);
         }
@@ -163,7 +165,7 @@ public class ProductDetailActivity extends AppCompatActivity {
         ratingBar = findViewById(R.id.product_rating_bar);
         ratingbarCount = findViewById(R.id.product_rating_count);
         spinner = findViewById(R.id.spinner);
-        btndatmua = findViewById(R.id.buttondatmua);
+        btndatmua = findViewById(R.id.btnAddToCart);
     }
 
     public static String EXTRA_PRODUCT_KEY = "PRODUCT_KEY";

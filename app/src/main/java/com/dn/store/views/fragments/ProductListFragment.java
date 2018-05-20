@@ -56,7 +56,7 @@ public abstract class ProductListFragment extends Fragment {
         FirebaseRecyclerOptions<Product> options = new FirebaseRecyclerOptions.Builder<Product>()
                 .setQuery(postsQuery, Product.class)
                 .build();
-        mAdapter = new ProductAdapter(options, getActivity(), null);
+        mAdapter = new ProductAdapter(options, getActivity(), null, 0);
         mRecycler.setAdapter(mAdapter);
 
     }

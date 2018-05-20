@@ -77,8 +77,11 @@ public class SearchActivity extends AppCompatActivity implements SearchView.OnQu
 
         switch (item.getItemId()) {
             case R.id.cart_action:
+                Intent intent = new Intent(this, GioHangActivity.class);
+                startActivity(intent);
+                return true;
         }
-        return true;
+        return false;
     }
 
     @Override
@@ -119,7 +122,7 @@ public class SearchActivity extends AppCompatActivity implements SearchView.OnQu
                 txtNoItem.setVisibility(View.VISIBLE);
                 progressBar.setVisibility(View.GONE);
             }
-        });
+        }, 0);
         mRecycler.setAdapter(mAdapter);
         mAdapter.startListening();
         progressBar.setVisibility(View.VISIBLE);
@@ -147,11 +150,5 @@ public class SearchActivity extends AppCompatActivity implements SearchView.OnQu
         if (mAdapter != null){
             mAdapter.startListening();
         }
-    }
-
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        finish();
     }
 }

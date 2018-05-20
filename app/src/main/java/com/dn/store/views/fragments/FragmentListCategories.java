@@ -29,7 +29,7 @@ public abstract class FragmentListCategories extends Fragment {
 
     public static final String ARG_OBJECT = "ID_CATEGORIES";
 
-    private int rootId;
+    private String rootId;
 
     private DatabaseReference mDatabase;
 
@@ -77,7 +77,7 @@ public abstract class FragmentListCategories extends Fragment {
         FirebaseRecyclerOptions<Category> options = new FirebaseRecyclerOptions.Builder<Category>()
                 .setQuery(postsQuery, Category.class)
                 .build();
-        mAdapter = new CategoriesAdapter(options, getActivity(), dataListener, getRootId());
+        mAdapter = new CategoriesAdapter(options, getActivity(), dataListener);
         mRecycler.setAdapter(mAdapter);
     }
 
@@ -101,11 +101,11 @@ public abstract class FragmentListCategories extends Fragment {
 
     public abstract Query getQuery(DatabaseReference mDatabase);
 
-    public int getRootId() {
+    public String getRootId() {
         return rootId;
     }
 
-    public void setRootId(int rootId) {
+    public void setRootId(String rootId) {
         this.rootId = rootId;
     }
 }

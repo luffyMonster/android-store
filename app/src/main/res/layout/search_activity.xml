@@ -28,8 +28,7 @@
         android:id="@+id/txt_no_item"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/search_not_found"
-        android:visibility="gone"/>
+        android:text="@string/search_not_found" />
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerSearch"
         android:layout_width="match_parent"

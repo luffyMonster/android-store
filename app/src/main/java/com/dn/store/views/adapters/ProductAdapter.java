@@ -28,6 +28,7 @@ import java.util.List;
 public class ProductAdapter extends FirebaseRecyclerAdapter<Product, ProductAdapter.ProductItemViewHolder>  {
 
     private Context context;
+    int resId;
     private DataListener listener;
     /**
      * Initialize a {@link RecyclerView.Adapter} that listens to a Firebase query. See
@@ -35,17 +36,22 @@ public class ProductAdapter extends FirebaseRecyclerAdapter<Product, ProductAdap
      *
      * @param options
      */
-    public ProductAdapter(@NonNull FirebaseRecyclerOptions<Product> options, Context context, DataListener listener) {
+    public ProductAdapter(@NonNull FirebaseRecyclerOptions<Product> options, Context context, DataListener listener, int resId) {
         super(options);
         this.context = context;
         this.listener = listener;
+        if (resId != R.layout.product_item && resId != R.layout.product_item_linear) {
+            this.resId = R.layout.product_item;
+        } else {
+            this.resId = resId;
+        }
     }
 
 
     @NonNull
     @Override
     public ProductItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.product_item, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(resId, parent, false);
         view.setMinimumHeight(parent.getMeasuredHeight() / 4);
         return new ProductItemViewHolder(view);
     }
@@ -109,8 +115,6 @@ public class ProductAdapter extends FirebaseRecyclerAdapter<Product, ProductAdap
             mProductRatingBar = itemView.findViewById(R.id.product_rating_bar);
             mProductRatingCount = itemView.findViewById(R.id.product_rating_count);
         }
-
-
 
     }
 

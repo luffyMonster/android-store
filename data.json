@@ -14,10 +14,8 @@
       "ratingCount": 12,
       "createdDate": 1526317598702,
       "categories": {
-        "0": {
-          "name": "Ba lo",
-          "detail": "Ba lo hoc sinh"
-        }
+        "0" : true,
+        "1" : true
       }
     },
     {
@@ -34,10 +32,7 @@
       "ratingCount": 11,
       "createdDate": 1526317598702,
       "categories": {
-        "0": {
-          "name": "Ba lo",
-          "detail": "Ba lo hoc sinh"
-        }
+        "0" : true
       }
     },
     {
@@ -54,10 +49,8 @@
       "ratingCount": 12,
       "createdDate": 1526317598702,
       "categories": {
-        "0": {
-          "name": "Ba lo",
-          "detail": "Ba lo hoc sinh"
-        }
+        "2": true,
+        "1": true
       }
     },
     {
@@ -74,10 +67,7 @@
       "ratingCount": 12,
       "createdDate": 1526317598702,
       "categories": {
-        "0": {
-          "name": "Ba lo",
-          "detail": "Ba lo hoc sinh"
-        }
+        "3" : true
       }
     },
     {
@@ -94,10 +84,8 @@
       "ratingCount": 12,
       "createdDate": 1526317598702,
       "categories": {
-        "0": {
-          "name": "Ba lo",
-          "detail": "Ba lo hoc sinh"
-        }
+        "4" : true,
+        "1" : true
       }
     }
   ],

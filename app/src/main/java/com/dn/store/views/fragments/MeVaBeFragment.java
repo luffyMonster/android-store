@@ -9,7 +9,7 @@ public class MeVaBeFragment extends FragmentListCategories {
 
     @Override
     public Query getQuery(DatabaseReference mDatabase) {
-        setRootId(2);
+        setRootId("2");
         return mDatabase.child("categories").orderByChild("root_id").equalTo(getRootId());
     }
 

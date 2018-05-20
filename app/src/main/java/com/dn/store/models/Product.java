@@ -2,6 +2,7 @@ package com.dn.store.models;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 public class Product {
 
@@ -9,23 +10,12 @@ public class Product {
     private List<String> details;
     private float price;
     private String image;
-    private List<Category> categories;
+//    private Map<String ,Boolean> categories;
     private float rating;
     private int ratingCount;
     private Long createdDate;
 
     public Product() {
-    }
-
-    public Product(String name, List<String> details, float price, String image, List<Category> categories, float rating, int ratingCount, Long createdDate) {
-        this.name = name;
-        this.details = details;
-        this.price = price;
-        this.image = image;
-        this.categories = categories;
-        this.rating = rating;
-        this.ratingCount = ratingCount;
-        this.createdDate = createdDate;
     }
 
     public String getName() {
@@ -60,13 +50,13 @@ public class Product {
         this.image = image;
     }
 
-    public List<Category> getCategories() {
-        return categories;
-    }
-
-    public void setCategories(List<Category> categories) {
-        this.categories = categories;
-    }
+//    public Map<String, Boolean> getCategories() {
+//        return categories;
+//    }
+//
+//    public void setCategories(Map<String, Boolean> categories) {
+//        this.categories = categories;
+//    }
 
     public float getRating() {
         return rating;

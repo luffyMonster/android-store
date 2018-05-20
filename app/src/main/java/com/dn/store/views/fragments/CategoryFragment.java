@@ -43,6 +43,7 @@ public class CategoryFragment extends Fragment {
         super.onCreateView(inflater, container, savedInstanceState);
         final View view = inflater.inflate(R.layout.fragment_category, container, false);
         toolbar = view.findViewById(R.id.toolbar);
+        toolbar.setTitle(R.string.title_caterory_fragment);
         setHasOptionsMenu(true);
         ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
 
@@ -60,6 +61,7 @@ public class CategoryFragment extends Fragment {
              @Override
              public void onTabSelected(TabLayout.Tab tab) {
                  pager.setCurrentItem(tab.getPosition());
+                 toolbar.setTitle(tab.getText());
              }
 
              @Override
