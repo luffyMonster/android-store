@@ -22,6 +22,7 @@ import com.dn.store.models.Product;
 import com.dn.store.views.adapters.ProductAdapter;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
@@ -77,8 +78,13 @@ public class SearchActivity extends AppCompatActivity implements SearchView.OnQu
 
         switch (item.getItemId()) {
             case R.id.cart_action:
-                Intent intent = new Intent(this, GioHangActivity.class);
-                startActivity(intent);
+                if (FirebaseAuth.getInstance().getCurrentUser() != null) {
+                    Intent intent = new Intent(this, LoginActivity.class);
+                    startActivity(intent);
+                } else {
+                    Intent intent = new Intent(this, GioHangActivity.class);
+                    startActivity(intent);
+                }
                 return true;
         }
         return false;

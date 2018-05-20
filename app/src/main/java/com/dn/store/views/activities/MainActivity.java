@@ -15,6 +15,7 @@ import com.dn.store.utils.Utils;
 import com.dn.store.views.fragments.AccountFragment;
 import com.dn.store.views.fragments.CategoryFragment;
 import com.dn.store.views.fragments.HomeFragment;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -42,8 +43,13 @@ public class MainActivity extends AppCompatActivity {
                     Utils.registerTransaction(getFragmentManager(), R.id.fragment_content, new AccountFragment(), AccountFragment.class.getName());
                     return true;
                 case R.id.navigation_cart:
-                    Intent intent = new Intent(MainActivity.this, GioHangActivity.class);
-                    startActivity(intent);
+                    if (FirebaseAuth.getInstance().getCurrentUser() != null) {
+                        Intent intent = new Intent(MainActivity.this, GioHangActivity.class);
+                        startActivity(intent);
+                    } else {
+                        Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                        startActivity(intent);
+                    }
                     return true;
             }
             return false;
@@ -58,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        BottomNavigationView navigation =  findViewById(R.id.navigation);
+        BottomNavigationView navigation = findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
     }

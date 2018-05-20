@@ -13,4 +13,7 @@
     <string name="total_pay">Tổng cộng</string>
     <string name="thanh_toan">Thanh toán giỏ hàng</string>
     <string name="tiep_tuc_mua_hang">Tiếp tục mua hàng</string>
+    <string name="welcome">Xin chào, </string>
+    <string name="login">Đăng nhập</string>
+    <string name="logout">Đăng xuất</string>
 </resources>
